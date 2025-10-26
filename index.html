@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💗 La Mitad — Reproductor Rosado</title>
+  <style>
+    :root{--bg:#ffeef6;--card:#ffd7ec;--accent:#ff6fa8;--text:#4b2a3a;--muted:#6b4956;font-family:Poppins,Arial;}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#fff);display:flex;justify-content:center;align-items:center;color:var(--text)}
+    .player{background:linear-gradient(180deg,var(--card),#fff);border-radius:22px;padding:28px; width:min(95%,420px); text-align:center; box-shadow:0 10px 30px rgba(255,111,168,0.18)}
+    .art{width:180px;height:180px;margin:0 auto;border-radius:16px;background:conic-gradient(#ffd7ec,#ffb5d6,#ff8ebf,#ff6fa8);display:flex;align-items:center;justify-content:center;font-size:56px;color:#fff}
+    h1{font-size:20px;margin:14px 0 6px}
+    p{margin:0;color:var(--muted)}
+    .controls{margin-top:18px}
+    .play{background:linear-gradient(180deg,var(--accent),#ff4f92);border:0;color:#fff;padding:12px 28px;border-radius:14px;cursor:pointer;font-weight:600}
+    .progress{height:8px;background:rgba(75,42,58,0.08);border-radius:999px;margin-top:12px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff9ac2,#ff6fa8)}
+    .lyrics{background:rgba(255,255,255,0.6);padding:12px;border-radius:12px;margin-top:16px;font-style:italic;color:var(--text)}
+    .credits{margin-top:12px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="player">
+    <div class="art">💗</div>
+    <h1>La Mitad — Camilo &amp; Christian Nodal</h1>
+    <p>Reproductor rosado — Hecho por Omar</p>
+
+    <div class="controls">
+      <button id="playBtn" class="play">Play</button>
+      <div class="progress"><i id="progressBar"></i></div>
+    </div>
+
+    <div class="lyrics">
+      <p><strong>💞 Letra (versión corta):</strong></p>
+      <p>Eres mi mitad, mi calma en la noche, el suspiro que llena el alma de amor.</p>
+    </div>
+
+    <div class="credits">Hecho por Omar</div>
+  </div>
+
+  <!-- El archivo mp3 debe llamarse EXACTAMENTE "la-mitad.mp3" y estar en la raíz del repo -->
+  <audio id="audioElem" src="la-mitad.mp3" preload="metadata"></audio>
+
+  <script>
+    const audio = document.getElementById('audioElem');
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+
+    playBtn.addEventListener('click', () => {
+      if(audio.paused){ audio.play(); playBtn.textContent='Pause'; }
+      else { audio.pause(); playBtn.textContent='Play'; }
+    });
+
+    audio.addEventListener('timeupdate', ()=>{
+      const pct = (audio.currentTime / (audio.duration || 1)) * 100;
+      progressBar.style.width = pct + '%';
+    });
+
+    audio.addEventListener('ended', () => {
+      playBtn.textContent='Play';
+      progressBar.style.width = '0%';
+    });
+  </script>
+</body>
+<style>html{
+ color:darkviolet;
+ font-size:25px;
+ font-weight:600;
+}
+</style><script>/*Here write your javascript code*/</script></html>
